@@ -21,14 +21,13 @@
 // export default App;
 
 import React from "react";
-import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./components/Login";
 
 function App() {
     return (
-        <AuthProvider>
+        <div>
             <Login />
-        </AuthProvider>
+        </div>
     );
 }
 

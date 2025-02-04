@@ -1,0 +1,23 @@
+.container-login {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    min-height: 480px;
+    font-family: "Monserrat", sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-login h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.container-login p {
+    font-size: 14px;
+}
