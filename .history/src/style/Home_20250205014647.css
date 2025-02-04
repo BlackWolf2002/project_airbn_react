@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.banner {
+    background-image: url("https://source.unsplash.com/1600x500/?modern-house");
+    height: 400px;
+    background-size: cover;
+}
+
+.locations,
+.rooms {
+    padding: 50px;
+}
+
+.location-list,
+.room-list {
+    display: flex;
+    gap: 20px;
+}
+
+.location-card,
+.room-card {
+    width: 200px;
+}

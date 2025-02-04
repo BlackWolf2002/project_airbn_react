@@ -1,0 +1,113 @@
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-bar {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Banner */
+.banner {
+    background-image: url("https://source.unsplash.com/1600x500/?nature,house");
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.banner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* Danh sách địa điểm */
+.locations {
+    padding: 50px;
+}
+
+.location-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+}
+
+.location-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.location-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Danh sách phòng thuê */
+.rooms {
+    padding: 50px;
+}
+
+.room-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+}
+
+.room-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+}
+
+.room-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}

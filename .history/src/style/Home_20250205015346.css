@@ -1,0 +1,108 @@
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    position: relative;
+    width: 300px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.suggestion-list {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.suggestion-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-list li:hover {
+    background: #f0f0f0;
+}
+
+/* Banner */
+.banner {
+    background-image: url("https://igotravel.vn/wwwroot/templates/website/global/img/blogdetail-1.jpg");
+    height: 400px;
+    background-size: cover;
+}
+
+.banner-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* Danh sách địa điểm */
+.locations {
+    padding: 50px;
+}
+
+.location-list {
+    display: flex;
+    gap: 20px;
+}
+
+.location-card {
+    width: 200px;
+}
+
+/* Danh sách phòng */
+.rooms {
+    padding: 50px;
+}
+
+.room-list {
+    display: flex;
+    gap: 20px;
+}
+
+.room-card {
+    width: 200px;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
