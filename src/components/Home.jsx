@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getLocations, getRooms } from "../api/apiService";
 import "../style/Home.css";
 import Navbar from "./Navbar";
@@ -22,16 +22,11 @@ const Home = () => {
         fetchData();
     }, []);
 
+    
+
     return (
         <div className="home">
-            <Navbar />
-
-            <div className="banner">
-                <div className="banner-overlay">
-                    <h1>Nhờ có Host, mọi điều đều có thể</h1>
-                </div>
-            </div>
-
+            <Navbar/>
             {/* Khám phá những điểm đến gần đây */}
             <section className="locations">
                 <h2>Khám phá những điểm đến gần đây</h2>
@@ -42,28 +37,9 @@ const Home = () => {
                                 src={location.hinhAnh}
                                 alt={location.tenViTri}
                             />
-                            <div className="location-info">
-                                <h3>{location.tenViTri}</h3>
-                                <p>{location.moTa}</p>
-                            </div>
+                            <h3>{location.tenViTri}</h3>
                         </div>
                     ))}
-                </div>
-            </section>
-
-            <section className="rooms">
-                <h2>Ở bất cứ đâu</h2>
-                <div className="room-list">
-                    {rooms.length > 0 ? (
-                        rooms.map((room) => (
-                            <div className="room-card" key={room.id}>
-                                <img src={room.hinhAnh} alt={room.tenPhong} />
-                                <h3>{room.tenPhong}</h3>
-                            </div>
-                        ))
-                    ) : (
-                        <p>Không có dữ liệu.</p>
-                    )}
                 </div>
             </section>
 

@@ -4,7 +4,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background: #fff;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -17,7 +16,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid red;
     outline: none;
 }
 
@@ -53,7 +52,7 @@
 }
 
 /* Banner */
-.banner {
+/*.banner {
     background-image: url("https://igotravel.vn/wwwroot/templates/website/global/img/blogdetail-1.jpg");
     height: 400px;
     background-size: cover;
@@ -69,7 +68,7 @@
     color: white;
     font-size: 2.5rem;
     text-align: center;
-}
+}*/
 
 /* Danh sách phòng */
 .rooms {
