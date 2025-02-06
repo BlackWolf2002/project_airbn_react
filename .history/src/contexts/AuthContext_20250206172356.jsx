@@ -6,14 +6,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        try {
-            const storedUser = localStorage.getItem("user");
-            if (storedUser) {
-                setUser(JSON.parse(storedUser)); // Kiểm tra JSON trước khi parse
-            }
-        } catch (error) {
-            console.error("Lỗi parse JSON:", error);
-            localStorage.removeItem("user"); // Xóa dữ liệu lỗi
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
         }
     }, []);
 
@@ -25,7 +20,6 @@ export const AuthProvider = ({ children }) => {
     const logoutUser = () => {
         setUser(null);
         localStorage.removeItem("user");
-        localStorage.removeItem("token");
     };
 
     return (

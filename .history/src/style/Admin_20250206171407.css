@@ -1,0 +1,188 @@
+/* ==== Layout chính ==== */
+.admin-container {
+    display: flex;
+    height: 100vh;
+    background-color: #3d1e1e; /* Màu nâu giống mẫu */
+}
+
+/* ==== Sidebar (Navbar) ==== */
+.admin-navbar {
+    width: 250px;
+    background-color: #2c1b1b;
+    color: white;
+    padding: 20px;
+}
+
+.admin-navbar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-navbar ul li {
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.admin-navbar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.admin-navbar ul li:hover {
+    background-color: #5a2d2d;
+}
+
+/* ==== Nội dung chính ==== */
+.admin-content {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 30px;
+}
+
+/* ==== Tiêu đề chính ==== */
+.admin-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ==== Thanh tìm kiếm ==== */
+.user-table input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ==== Bảng danh sách User ==== */
+.user-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+    background: #ff5757;
+    color: white;
+}
+
+.user-table tr:hover {
+    background: #f0f0f0;
+}
+
+.user-table .avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* ==== Role (Admin/User) ==== */
+.admin-role {
+    color: red;
+    font-weight: bold;
+}
+
+.user-role {
+    color: green;
+    font-weight: bold;
+}
+
+/* ==== Hành động (Edit & Delete) ==== */
+.user-table button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.user-table button:hover {
+    opacity: 0.7;
+}
+
+/* ==== Form thêm/sửa User ==== */
+.user-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-form input,
+.user-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-form button {
+    width: 100%;
+    padding: 12px;
+    background: #ff5757;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.user-form button:hover {
+    background: #d94d4d;
+}
+
+/* ==== Nút thêm người dùng ==== */
+.add-user-button {
+    background: #ff5757;
+    color: white;
+    padding: 12px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    float: right;
+}
+
+.add-user-button:hover {
+    background: #d94d4d;
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-navbar {
+        width: 100%;
+    }
+}

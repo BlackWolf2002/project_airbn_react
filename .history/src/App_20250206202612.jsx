@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./components/Home";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./routes/AdminRoute";
 import UserTable from "./components/UserTable"; // Import bảng user
