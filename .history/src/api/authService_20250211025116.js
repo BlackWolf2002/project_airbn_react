@@ -21,7 +21,10 @@ export const login = async (email, password) => {
         if (response.data && response.data.content) {
             const { token, user } = response.data.content;
 
-            localStorage.removeItem("token"); // Chỉ xóa token cũ
+            // 🛠 Xóa toàn bộ dữ liệu cũ trước khi lưu mới
+            localStorage.clear();
+
+            // 🔄 Lưu token và thông tin user mới
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
 

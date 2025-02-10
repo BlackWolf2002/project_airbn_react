@@ -21,11 +21,16 @@ export const login = async (email, password) => {
         if (response.data && response.data.content) {
             const { token, user } = response.data.content;
 
-            localStorage.removeItem("token"); // Chỉ xóa token cũ
+            // 🛠 Xóa toàn bộ dữ liệu cũ trước khi lưu dữ liệu mới
+            localStorage.clear();
+
+            // 🔄 Lưu token và thông tin user mới
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
 
-            console.log("✅ Token mới đã được lưu:", token);
+            console.log("✅ Đăng nhập thành công:", user);
             return { token, user };
         } else {
             throw new Error("Đăng nhập thất bại.");

@@ -8,7 +8,7 @@ const TOKEN_CYBERSOFT =
 export const login = async (email, password) => {
     try {
         const response = await axios.post(
-            "https://airbnbnew.cybersoft.edu.vn/api/auth/signin",
+            `${API_URL}/signin`,
             { email, password },
             {
                 headers: {
@@ -21,18 +21,53 @@ export const login = async (email, password) => {
         if (response.data && response.data.content) {
             const { token, user } = response.data.content;
 
-            localStorage.removeItem("token"); // Chỉ xóa token cũ
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("email", email); // Lưu email
+            localStorage.setItem("password", password); // Lưu password
 
-            console.log("✅ Token mới đã được lưu:", token);
+            console.log("Đăng nhập thành công:", user);
             return { token, user };
         } else {
             throw new Error("Đăng nhập thất bại.");
         }
     } catch (error) {
-        console.error("❌ Lỗi đăng nhập:", error);
+        console.error("Lỗi đăng nhập:", error);
         throw error.response ? error.response.data : error;
+    }
+};
+
+export const refreshToken = async () => {
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+
+    if (!email || !password) {
+        throw new Error("Không tìm thấy thông tin đăng nhập để làm mới token.");
+    }
+
+    try {
+        const response = await axios.post(
+            "https://airbnbnew.cybersoft.edu.vn/api/auth/signin",
+            { email, password },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    TokenCybersoft: TOKEN_CYBERSOFT,
+                },
+            }
+        );
+
+        if (response.data && response.data.content) {
+            const { token } = response.data.content;
+            localStorage.setItem("token", token); // Cập nhật token mới
+            console.log("🔄 Token đã được làm mới:", token);
+            return token;
+        } else {
+            throw new Error("API không trả về dữ liệu token hợp lệ.");
+        }
+    } catch (error) {
+        console.error("Lỗi khi làm mới token:", error);
+        throw new Error("Không thể làm mới token. Vui lòng đăng nhập lại.");
     }
 };
 

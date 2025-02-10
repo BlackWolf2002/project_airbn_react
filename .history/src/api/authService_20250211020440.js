@@ -8,7 +8,7 @@ const TOKEN_CYBERSOFT =
 export const login = async (email, password) => {
     try {
         const response = await axios.post(
-            "https://airbnbnew.cybersoft.edu.vn/api/auth/signin",
+            `${API_URL}/signin`,
             { email, password },
             {
                 headers: {
@@ -18,21 +18,32 @@ export const login = async (email, password) => {
             }
         );
 
-        if (response.data && response.data.content) {
-            const { token, user } = response.data.content;
+        console.log("Dữ liệu trả về từ API:", response.data);
 
-            localStorage.removeItem("token"); // Chỉ xóa token cũ
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-
-            console.log("✅ Token mới đã được lưu:", token);
-            return { token, user };
-        } else {
-            throw new Error("Đăng nhập thất bại.");
+        // Kiểm tra dữ liệu trả về từ API
+        if (!response.data || !response.data.content) {
+            throw new Error("API không trả về dữ liệu hợp lệ.");
         }
+
+        const { token, user } = response.data.content;
+
+        if (!token || !user || !user.role) {
+            throw new Error("Dữ liệu token hoặc thông tin user không đầy đủ.");
+        }
+
+        // Lưu token & user vào localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        return { token, user };
     } catch (error) {
-        console.error("❌ Lỗi đăng nhập:", error);
-        throw error.response ? error.response.data : error;
+        // Xử lý lỗi API hoặc lỗi không xác định
+        console.error("Lỗi đăng nhập:", error);
+        const errorMessage = error.response
+            ? error.response.data.message || "Lỗi từ API"
+            : error.message || "Lỗi không xác định";
+
+        throw new Error(errorMessage);
     }
 };
 

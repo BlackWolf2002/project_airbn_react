@@ -10,7 +10,6 @@ import Home from "./components/Home";
 import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./routes/AdminRoute";
-import RoomManagement from "./components/RoomManagement";
 
 function App() {
     return (
@@ -33,16 +32,6 @@ function App() {
                         element={
                             <AdminRoute>
                                 <AdminPage />
-                            </AdminRoute>
-                        }
-                    />
-
-                    {/* Route cho quản lý Room */}
-                    <Route
-                        path="/admin/rooms"
-                        element={
-                            <AdminRoute>
-                                <RoomManagement />
                             </AdminRoute>
                         }
                     />

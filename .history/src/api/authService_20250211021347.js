@@ -8,7 +8,7 @@ const TOKEN_CYBERSOFT =
 export const login = async (email, password) => {
     try {
         const response = await axios.post(
-            "https://airbnbnew.cybersoft.edu.vn/api/auth/signin",
+            `${API_URL}/signin`,
             { email, password },
             {
                 headers: {
@@ -18,22 +18,46 @@ export const login = async (email, password) => {
             }
         );
 
-        if (response.data && response.data.content) {
-            const { token, user } = response.data.content;
+        console.log("Dữ liệu trả về từ API:", response.data);
 
-            localStorage.removeItem("token"); // Chỉ xóa token cũ
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-
-            console.log("✅ Token mới đã được lưu:", token);
-            return { token, user };
-        } else {
-            throw new Error("Đăng nhập thất bại.");
+        if (!response.data || !response.data.content) {
+            throw new Error("API không trả về dữ liệu hợp lệ.");
         }
+
+        const { token, user } = response.data.content;
+
+        if (!token || !user) {
+            throw new Error("Dữ liệu token hoặc user không đầy đủ.");
+        }
+
+        localStorage.setItem("token", token); // Lưu token
+        localStorage.setItem("user", JSON.stringify(user)); // Lưu thông tin user
+
+        return { token, user };
     } catch (error) {
-        console.error("❌ Lỗi đăng nhập:", error);
+        console.error("Lỗi đăng nhập:", error);
         throw error.response ? error.response.data : error;
     }
+};
+
+const refreshToken = async () => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) throw new Error("Refresh token không tồn tại.");
+
+    const response = await axios.post(
+        `${API_URL}/refresh-token`,
+        { refreshToken },
+        {
+            headers: {
+                TokenCybersoft: TOKEN_CYBERSOFT,
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    const { token, newRefreshToken } = response.data;
+    localStorage.setItem("token", token);
+    localStorage.setItem("refreshToken", newRefreshToken);
 };
 
 // Hàm đăng ký
