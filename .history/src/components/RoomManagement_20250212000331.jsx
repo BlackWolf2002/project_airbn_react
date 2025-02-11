@@ -9,7 +9,6 @@ import RoomForm from "./RoomForm"; // Import RoomForm
 // import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import "../style/RoomManagement.css";
 import { fetchLocations } from "../api/locationService";
-import AdminNavbar from "./AdminNavbar";
 
 const RoomManagement = () => {
     const [rooms, setRooms] = useState([]);
@@ -120,8 +119,6 @@ const RoomManagement = () => {
 
     return (
         <div className="room-management">
-            {/* Sidebar menu */}
-            <AdminNavbar />
             <h1>Quản lý phòng</h1>
             <div className="search-bar">
                 <input
@@ -133,7 +130,6 @@ const RoomManagement = () => {
             </div>
 
             <button
-                className="add-room"
                 onClick={() => {
                     console.log("Nút thêm phòng mới được nhấn");
                     setFormData(null); // Xóa dữ liệu cũ để thêm mới
@@ -190,7 +186,6 @@ const RoomManagement = () => {
                                     </button>
 
                                     <button
-                                        className="delete"
                                         onClick={() => handleDelete(room.id)}
                                     >
                                         Xóa

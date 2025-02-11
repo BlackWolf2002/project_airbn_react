@@ -119,6 +119,7 @@ const RoomManagement = () => {
     }, [currentPage]);
 
     return (
+        <div></div>
         <div className="room-management">
             {/* Sidebar menu */}
             <AdminNavbar />

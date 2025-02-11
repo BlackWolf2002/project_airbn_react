@@ -48,7 +48,7 @@ export const addRoom = async (roomData) => {
         }
 
         const headers = {
-            token: token, // Token của user
+            Authorization: `Bearer ${token}`, // Token của user
             TokenCybersoft: TOKEN_CYBERSOFT, // Token cố định của Cybersoft
             "Content-Type": "application/json-patch+json", // Kiểu dữ liệu yêu cầu của API
         };
@@ -83,9 +83,9 @@ export const updateRoom = async (id, roomData) => {
             roomData,
             {
                 headers: {
-                    token: token,
+                    Authorization: `Bearer ${token}`,
                     TokenCybersoft: TOKEN_CYBERSOFT,
-                    "Content-Type": "application/json-patch+json",
+                    "Content-Type": "application/json",
                 },
             }
         );
@@ -109,12 +109,6 @@ export const updateRoom = async (id, roomData) => {
 export const deleteRoom = async (id) => {
     try {
         const token = localStorage.getItem("token");
-        if (!token) {
-            throw new Error(
-                "❌ Token user không tồn tại. Vui lòng đăng nhập lại."
-            );
-        }
-
         const response = await axios.delete(
             `${API_BASE_URL}api/phong-thue/${id}`,
             {
@@ -125,8 +119,7 @@ export const deleteRoom = async (id) => {
                 },
             }
         );
-
-        console.log("✅ API phản hồi sau khi xóa:", response.data);
+        console.log("API phản hồi sau khi xóa:", response.data);
         return response.data;
     } catch (error) {
         console.error("❌ Lỗi khi xóa phòng:", error.response?.data || error);

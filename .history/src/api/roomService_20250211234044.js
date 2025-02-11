@@ -48,7 +48,7 @@ export const addRoom = async (roomData) => {
         }
 
         const headers = {
-            token: token, // Token của user
+            Authorization: `Bearer ${token}`, // Token của user
             TokenCybersoft: TOKEN_CYBERSOFT, // Token cố định của Cybersoft
             "Content-Type": "application/json-patch+json", // Kiểu dữ liệu yêu cầu của API
         };
@@ -83,9 +83,9 @@ export const updateRoom = async (id, roomData) => {
             roomData,
             {
                 headers: {
-                    token: token,
+                    Authorization: `Bearer ${token}`,
                     TokenCybersoft: TOKEN_CYBERSOFT,
-                    "Content-Type": "application/json-patch+json",
+                    "Content-Type": "application/json",
                 },
             }
         );

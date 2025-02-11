@@ -85,7 +85,7 @@ export const updateRoom = async (id, roomData) => {
                 headers: {
                     token: token,
                     TokenCybersoft: TOKEN_CYBERSOFT,
-                    "Content-Type": "application/json-patch+json",
+                    "Content-Type": "application/json",
                 },
             }
         );
