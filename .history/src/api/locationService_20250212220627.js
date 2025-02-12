@@ -96,8 +96,8 @@ export const searchLocations = async (keyword, pageIndex = 1, pageSize = 3) => {
 export const uploadLocationImage = async (id, file) => {
     try {
         const formData = new FormData();
-        formData.append("formFile", file);
-        formData.append("maViTri", id);
+        formData.append("formFile", file); // Tên phải trùng với Swagger
+        formData.append("maViTri", id); // Thêm maViTri vào FormData
 
         const response = await axios.post(
             `${API_BASE_URL}api/vi-tri/upload-hinh-vitri?maViTri=${id}`,
@@ -122,8 +122,6 @@ export const uploadLocationImage = async (id, file) => {
 //Cập nhật ví trí
 export const updateLocation = async (id, locationData) => {
     try {
-        console.log("🔍 Dữ liệu gửi lên API cập nhật:", locationData);
-
         const response = await axios.put(
             `${API_BASE_URL}api/vi-tri/${id}`,
             locationData,
@@ -131,14 +129,9 @@ export const updateLocation = async (id, locationData) => {
                 headers: getHeaders(),
             }
         );
-
-        console.log("✅ Cập nhật vị trí thành công:", response.data);
         return response.data;
     } catch (error) {
-        console.error(
-            "❌ Lỗi khi cập nhật vị trí:",
-            error.response?.data || error
-        );
+        console.error("Lỗi khi cập nhật vị trí:", error);
         throw error.response?.data || error;
     }
 };

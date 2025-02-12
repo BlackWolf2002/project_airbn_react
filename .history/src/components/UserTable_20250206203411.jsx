@@ -5,7 +5,6 @@ import {
     deleteUser,
     updateUser,
 } from "../api/userService.js";
-import moment from "moment"; // Import moment để xử lý ngày tháng
 import "../style/Admin.css";
 
 const UserTable = ({ onEdit }) => {
@@ -13,7 +12,7 @@ const UserTable = ({ onEdit }) => {
     const [search, setSearch] = useState("");
     const [totalUsers, setTotalUsers] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 10;
+    const pageSize = 10; // Số lượng user mỗi trang
 
     useEffect(() => {
         if (search.trim() === "") {
@@ -30,15 +29,20 @@ const UserTable = ({ onEdit }) => {
     };
 
     const handleUpdateUser = async (id, updatedData) => {
+        console.log("📢 Gửi dữ liệu cập nhật:", updatedData); // Debug dữ liệu gửi đi
         const success = await updateUser(id, updatedData);
 
         if (success) {
             alert("✅ Cập nhật thành công!");
+
+            // Cập nhật ngay lập tức trong state
             setUsers((prevUsers) =>
                 prevUsers.map((user) =>
                     user.id === id ? { ...user, ...updatedData } : user
                 )
             );
+
+            // Gọi lại API lấy danh sách mới nhất sau khi cập nhật để đồng bộ
             loadUsers(currentPage);
         } else {
             alert("❌ Cập nhật thất bại!");
@@ -52,11 +56,15 @@ const UserTable = ({ onEdit }) => {
         }
 
         try {
+            console.log(`📢 Gọi API tìm kiếm với từ khóa: ${query}`);
             const result = await searchUsers(query);
+            console.log("✅ Kết quả API trả về:", result);
+
             if (result.length > 0) {
                 setUsers(result);
             } else {
-                const allUsers = await getUsers(1, 1000);
+                console.warn("⚠️ API không tìm thấy user, thử lọc frontend...");
+                const allUsers = await getUsers(1, 1000); // Lấy toàn bộ user để tìm kiếm
                 const filteredUsers = allUsers.data.filter((user) =>
                     user.name.toLowerCase().includes(query.toLowerCase())
                 );
@@ -127,14 +135,7 @@ const UserTable = ({ onEdit }) => {
                                         </span>
                                     </div>
                                 </td>
-                                <td>
-                                    {/* Dùng moment.js để định dạng ngày tháng */}
-                                    {user.birthday
-                                        ? moment(user.birthday).format(
-                                              "DD/MM/YYYY"
-                                          )
-                                        : "Không có dữ liệu"}
-                                </td>
+                                <td>{user.birthday || "Không có dữ liệu"}</td>
                                 <td>{user.email}</td>
                                 <td
                                     className={
@@ -153,6 +154,7 @@ const UserTable = ({ onEdit }) => {
                                     >
                                         ✏️
                                     </button>
+
                                     <button
                                         onClick={() => handleDelete(user.id)}
                                     >

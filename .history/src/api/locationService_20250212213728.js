@@ -7,7 +7,7 @@ const TOKEN_CYBERSOFT =
 const getHeaders = () => {
     const token = localStorage.getItem("token");
     return {
-        token: token,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         TokenCybersoft: TOKEN_CYBERSOFT,
         "Content-Type": "application/json",
     };
@@ -71,74 +71,6 @@ export const deleteLocation = async (id) => {
         return response.data;
     } catch (error) {
         console.error("Lỗi khi xóa vị trí:", error);
-        throw error.response?.data || error;
-    }
-};
-
-//Tìm vị trí có phân trang
-export const searchLocations = async (keyword, pageIndex = 1, pageSize = 3) => {
-    try {
-        const response = await axios.get(
-            `${API_BASE_URL}api/vi-tri/phan-trang-tim-kiem`,
-            {
-                params: { keyword, pageIndex, pageSize },
-                headers: getHeaders(),
-            }
-        );
-        return response.data.content;
-    } catch (error) {
-        console.error("Lỗi khi tìm kiếm vị trí:", error);
-        throw error.response?.data || error;
-    }
-};
-
-//Tải lên hình ảnh vị trí
-export const uploadLocationImage = async (id, file) => {
-    try {
-        const formData = new FormData();
-        formData.append("formFile", file);
-        formData.append("maViTri", id);
-
-        const response = await axios.post(
-            `${API_BASE_URL}api/vi-tri/upload-hinh-vitri?maViTri=${id}`,
-            formData,
-            {
-                headers: {
-                    TokenCybersoft: TOKEN_CYBERSOFT,
-                    token: localStorage.getItem("token"),
-                    "Content-Type": "multipart/form-data",
-                },
-            }
-        );
-
-        console.log("✅ Ảnh đã được tải lên thành công:", response.data);
-        return response.data;
-    } catch (error) {
-        console.error("❌ Lỗi khi tải ảnh lên:", error.response?.data || error);
-        throw error.response?.data || error;
-    }
-};
-
-//Cập nhật ví trí
-export const updateLocation = async (id, locationData) => {
-    try {
-        console.log("🔍 Dữ liệu gửi lên API cập nhật:", locationData);
-
-        const response = await axios.put(
-            `${API_BASE_URL}api/vi-tri/${id}`,
-            locationData,
-            {
-                headers: getHeaders(),
-            }
-        );
-
-        console.log("✅ Cập nhật vị trí thành công:", response.data);
-        return response.data;
-    } catch (error) {
-        console.error(
-            "❌ Lỗi khi cập nhật vị trí:",
-            error.response?.data || error
-        );
         throw error.response?.data || error;
     }
 };

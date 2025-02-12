@@ -93,28 +93,27 @@ export const searchLocations = async (keyword, pageIndex = 1, pageSize = 3) => {
 };
 
 //Tải lên hình ảnh vị trí
-export const uploadLocationImage = async (id, file) => {
+export const uploadLocationImage = async (maViTri, file) => {
     try {
         const formData = new FormData();
-        formData.append("formFile", file);
-        formData.append("maViTri", id);
+        formData.append("formFile", file); // API yêu cầu key là "formFile"
 
         const response = await axios.post(
-            `${API_BASE_URL}api/vi-tri/upload-hinh-vitri?maViTri=${id}`,
+            `${API_BASE_URL}api/vi-tri/upload-hinh-vitri?maViTri=${maViTri}`,
             formData,
             {
                 headers: {
-                    TokenCybersoft: TOKEN_CYBERSOFT,
                     token: localStorage.getItem("token"),
-                    "Content-Type": "multipart/form-data",
+                    TokenCybersoft: TOKEN_CYBERSOFT,
+                    "Content-Type": "multipart/form-data", // Chỉ áp dụng cho API này
                 },
             }
         );
 
-        console.log("✅ Ảnh đã được tải lên thành công:", response.data);
+        console.log("✅ Ảnh vị trí tải lên thành công:", response.data);
         return response.data;
     } catch (error) {
-        console.error("❌ Lỗi khi tải ảnh lên:", error.response?.data || error);
+        console.error("❌ Lỗi khi tải lên hình ảnh vị trí:", error);
         throw error.response?.data || error;
     }
 };
@@ -122,8 +121,6 @@ export const uploadLocationImage = async (id, file) => {
 //Cập nhật ví trí
 export const updateLocation = async (id, locationData) => {
     try {
-        console.log("🔍 Dữ liệu gửi lên API cập nhật:", locationData);
-
         const response = await axios.put(
             `${API_BASE_URL}api/vi-tri/${id}`,
             locationData,
@@ -131,14 +128,9 @@ export const updateLocation = async (id, locationData) => {
                 headers: getHeaders(),
             }
         );
-
-        console.log("✅ Cập nhật vị trí thành công:", response.data);
         return response.data;
     } catch (error) {
-        console.error(
-            "❌ Lỗi khi cập nhật vị trí:",
-            error.response?.data || error
-        );
+        console.error("Lỗi khi cập nhật vị trí:", error);
         throw error.response?.data || error;
     }
 };

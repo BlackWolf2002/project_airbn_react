@@ -11,8 +11,7 @@ import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./routes/AdminRoute";
 import RoomManagement from "./pages/RoomManagement";
-import ViTri from "./pages/ViTri";
-import BookingManagement from "./pages/BookingManagement";
+import ViTri from "./components/ViTri";
 
 function App() {
     return (
@@ -55,16 +54,6 @@ function App() {
                         element={
                             <AdminRoute>
                                 <ViTri />
-                            </AdminRoute>
-                        }
-                    />
-
-                    {/* Route cho quản lý Booking*/}
-                    <Route
-                        path="/admin/bookings"
-                        element={
-                            <AdminRoute>
-                                <BookingManagement />
                             </AdminRoute>
                         }
                     />

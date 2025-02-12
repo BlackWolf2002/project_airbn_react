@@ -10,9 +10,7 @@ import Home from "./components/Home";
 import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./routes/AdminRoute";
-import RoomManagement from "./pages/RoomManagement";
-import ViTri from "./pages/ViTri";
-import BookingManagement from "./pages/BookingManagement";
+import RoomManagement from "./components/RoomManagement";
 
 function App() {
     return (
@@ -51,20 +49,10 @@ function App() {
 
                     {/* Route cho quản lý Vị Trí*/}
                     <Route
-                        path="/admin/locations"
+                        path="/admin/"
                         element={
                             <AdminRoute>
-                                <ViTri />
-                            </AdminRoute>
-                        }
-                    />
-
-                    {/* Route cho quản lý Booking*/}
-                    <Route
-                        path="/admin/bookings"
-                        element={
-                            <AdminRoute>
-                                <BookingManagement />
+                                <RoomManagement />
                             </AdminRoute>
                         }
                     />

@@ -61,7 +61,7 @@ function App() {
 
                     {/* Route cho quản lý Booking*/}
                     <Route
-                        path="/admin/bookings"
+                        path="/admin/locations"
                         element={
                             <AdminRoute>
                                 <BookingManagement />
