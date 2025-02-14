@@ -100,6 +100,8 @@ const RoomManagement = () => {
     // Xử lý xóa phòng
     const handleDelete = async (id) => {
         try {
+            const token = localStorage.getItem("token");
+            console.log("📢 Token trước khi xóa phòng:", token);
             console.log("📢 Đang xóa phòng có ID:", id);
             await deleteRoom(id);
             console.log("✅ Xóa phòng thành công!", id);
@@ -170,12 +172,18 @@ const RoomManagement = () => {
                                 <td>{room.moTa?.slice(0, 50) || ""}...</td>
                                 <td>
                                     <button
-                                        onClick={() =>
-                                            console.log("Chỉnh sửa", room.id)
-                                        }
+                                        onClick={() => {
+                                            console.log(
+                                                "📢 Đang chỉnh sửa phòng ID:",
+                                                room.id
+                                            );
+                                            setFormData(room); // Cập nhật dữ liệu phòng vào form
+                                            setIsFormVisible(true); // Mở form chỉnh sửa
+                                        }}
                                     >
                                         Chỉnh sửa
                                     </button>
+
                                     <button
                                         onClick={() => handleDelete(room.id)}
                                     >
