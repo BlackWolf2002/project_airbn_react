@@ -6,6 +6,7 @@ import "../style/Home.css";
 const Navbar = () => {
     const [search, setSearch] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    const [isSearchActive, setIsSearchActive] = useState(false);
     const navigate = useNavigate();
     const videoRefs = useRef([]);
     const videos = [
@@ -38,23 +39,13 @@ const Navbar = () => {
         handleVideoPlayback();
     }, [videos]);
 
-    const handleSearch = async (event) => {
-        const query = event.target.value;
-        setSearch(query);
-        if (query.length > 2) {
-            const results = await searchLocations(query);
-            setSuggestions(results);
-        } else {
-            setSuggestions([]);
-        }
-    };
 
-    const selectLocation = (location) => {
-        navigate(`/rooms?location=${location.id}`);
-    };
 
+
+   
     return (
         <div className="relative h-[770px]">
+            <div className={`overlay ${isSearchActive ? 'active' : ''}`}></div>
             <div className="absolute top-0 left-0 w-full h-full grid grid-cols-2 grid-rows-2 gap-0 z-0">
                 {videos.map((video, index) => (
                     <video
@@ -84,32 +75,9 @@ const Navbar = () => {
                         border: '1px solid rgba(255, 255, 255, 0.18)',
                     }}
                 >
-                    <div className="text-red-600 font-bold text-3xl hover:text-red-400 cursor-pointer">airbnb</div>
+                    <div className="text-red-600 font-bold text-3xl hover:text-red-400 cursor-pointer my-2">airbnb</div>
 
-                    <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Bạn sắp đi đâu?"
-                            value={search}
-                            onChange={handleSearch}
-                            className="placeholder-red-400"
-                        />
-                        <button className="search-btn">🔍</button>
-                        {suggestions.length > 0 && (
-                            <ul className="suggestion-list">
-                                {suggestions.map((loc) => (
-                                    <li
-                                        key={loc.id}
-                                        onClick={() => selectLocation(loc)}
-                                    >
-                                        {loc.tenViTri}, {loc.tinhThanh}, {loc.quocGia}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-
-                    <div className="nav-links flex space-x-4">
+                    <div className="nav-links flex space-x-4 my-4">
                         <Link to="/login" className="mx-2">
                             <a
                                 href="#_"

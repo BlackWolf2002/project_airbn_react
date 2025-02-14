@@ -31,7 +31,6 @@ const UserTable = ({ onEdit }) => {
     const handleUpdateUser = async (id, updatedData) => {
         console.log("📢 Gửi dữ liệu cập nhật:", updatedData); // Debug dữ liệu gửi đi
         const success = await updateUser(id, updatedData);
-
         if (success) {
             alert("✅ Cập nhật thành công!");
 
@@ -147,11 +146,7 @@ const UserTable = ({ onEdit }) => {
                                     {user.role}
                                 </td>
                                 <td>
-                                    <button
-                                        onClick={() =>
-                                            onEdit(user, handleUpdateUser)
-                                        }
-                                    >
+                                <button onClick={() => onEdit(user, handleUpdateUser)}>
                                         ✏️
                                     </button>
 

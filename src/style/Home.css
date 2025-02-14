@@ -10,6 +10,7 @@
 .search-container {
     position: relative;
     width: 300px;
+    z-index: 20; /* Đảm bảo thanh tìm kiếm nằm trên các video */
 }
 
 .search-container input {
@@ -40,6 +41,11 @@
     border-radius: 5px;
     max-height: 150px;
     overflow-y: auto;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20; /* Đảm bảo các gợi ý tìm kiếm nằm trên các video */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion-list li {
@@ -143,4 +149,34 @@
     color: white;
     text-align: center;
     padding: 20px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.search-container {
+    position: relative;
+    z-index: 20; /* Đảm bảo thanh tìm kiếm nằm trên các video */
+}
+
+.suggestion-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 20; /* Đảm bảo các gợi ý tìm kiếm nằm trên các video */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
