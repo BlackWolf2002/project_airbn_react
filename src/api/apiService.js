@@ -50,3 +50,15 @@ export const searchLocations = async (query) => {
         return [];
     }
 };
+
+// ✅ API lấy thông tin chi tiết địa điểm
+export const getLocationById = async (id) => {
+    try {
+        const response = await api.get(`/vi-tri/${id}`);
+        return response.data.content;
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy thông tin chi tiết địa điểm:", error);
+        return null;
+    }
+};
+

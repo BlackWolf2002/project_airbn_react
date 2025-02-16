@@ -133,3 +133,54 @@ export const deleteRoom = async (id) => {
         throw error.response?.data || error;
     }
 };
+
+
+export const fetchRoomsByLocation = async (maViTri) => {
+    try {
+        const token = localStorage.getItem("token"); // Token user sau khi đăng nhập
+        const response = await axios.get(
+            `${API_BASE_URL}api/phong-thue/lay-phong-theo-vi-tri`,
+            {
+                params: { maViTri }, // Truyền mã vị trí vào query params
+                headers: {
+                    token: token,
+                    tokenCybersoft: TOKEN_CYBERSOFT, // Token Cybersoft bắt buộc
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.log("✅ Danh sách phòng theo vị trí:", response.data);
+        return response.data.content || [];
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy danh sách phòng theo vị trí:", error.response?.data || error);
+        throw error.response?.data || error;
+    }
+};
+
+
+export const getRoomByID = async (id) => {
+    try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            throw new Error("❌ Token user không tồn tại. Vui lòng đăng nhập lại.");
+        }
+
+        const response = await axios.get(
+            `${API_BASE_URL}api/phong-thue/${id}`,
+            {
+                headers: {
+                    token: token,
+                    TokenCybersoft: TOKEN_CYBERSOFT,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.log("✅ Chi tiết phòng:", response.data);
+        return response.data; // Trả về dữ liệu phòng chi tiết
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy chi tiết phòng:", error.response?.data || error);
+        throw error.response?.data || error;
+    }
+};

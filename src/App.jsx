@@ -13,6 +13,8 @@ import AdminRoute from "./routes/AdminRoute";
 import RoomManagement from "./pages/RoomManagement";
 import ViTri from "./pages/ViTri";
 import BookingManagement from "./pages/BookingManagement";
+import RoomsByLocation from "./pages/RoomsByLocation.jsx";
+import RoomDetailPage from "./pages/RoomDetailPage"; // Import trang chi tiết phòng
 
 function App() {
     return (
@@ -49,7 +51,7 @@ function App() {
                         }
                     />
 
-                    {/* Route cho quản lý Vị Trí*/}
+                    {/* Route cho quản lý Vị Trí */}
                     <Route
                         path="/admin/locations"
                         element={
@@ -59,7 +61,7 @@ function App() {
                         }
                     />
 
-                    {/* Route cho quản lý Booking*/}
+                    {/* Route cho quản lý Booking */}
                     <Route
                         path="/admin/bookings"
                         element={
@@ -68,6 +70,12 @@ function App() {
                             </AdminRoute>
                         }
                     />
+
+                    {/* Route hiển thị danh sách phòng theo vị trí */}
+                    <Route path="/rooms-by-location/:id" element={<RoomsByLocation />} />
+
+                    {/* Route chi tiết phòng */}
+                    <Route path="/room/:id" element={<RoomDetailPage />} />
                 </Routes>
             </Router>
         </AuthProvider>

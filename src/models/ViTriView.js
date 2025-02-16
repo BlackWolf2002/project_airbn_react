@@ -8,8 +8,4 @@ class ViTriView {
     }
 }
 
-// Ví dụ sử dụng
-const viTri = new ViTriView(1, 'Hà Nội', 'Hà Nội', 'Việt Nam', 'hanoi.jpg');
-console.log(viTri);
-
 export default ViTriView;
