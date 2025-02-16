@@ -142,3 +142,18 @@ export const updateLocation = async (id, locationData) => {
         throw error.response?.data || error;
     }
 };
+
+export const getLocations = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}api/vi-tri`, {
+            headers: {
+                tokenCybersoft: TOKEN_CYBERSOFT,
+                "Content-Type": "application/json",
+            },
+        });
+        return response.data.content;
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy danh sách vị trí:", error.response?.data || error);
+        throw error.response?.data || error;
+    }
+};

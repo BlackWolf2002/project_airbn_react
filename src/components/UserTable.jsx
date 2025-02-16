@@ -31,7 +31,6 @@ const UserTable = ({ onEdit }) => {
 
     const handleUpdateUser = async (id, updatedData) => {
         const success = await updateUser(id, updatedData);
-
         if (success) {
             alert("✅ Cập nhật thành công!");
             setUsers((prevUsers) =>
@@ -146,11 +145,7 @@ const UserTable = ({ onEdit }) => {
                                     {user.role}
                                 </td>
                                 <td>
-                                    <button
-                                        onClick={() =>
-                                            onEdit(user, handleUpdateUser)
-                                        }
-                                    >
+                                <button onClick={() => onEdit(user, handleUpdateUser)}>
                                         ✏️
                                     </button>
                                     <button
