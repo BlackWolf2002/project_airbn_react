@@ -1,69 +1,36 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { searchLocations } from "../api/apiService";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../style/Home.css";
+import { useNavigate } from "react-router-dom";
+import { searchLocations } from "../api/apiService";
 
 const Navbar = () => {
-    const [search, setSearch] = useState('');
-    const [suggestions, setSuggestions] = useState([]);
     const [isSearchActive, setIsSearchActive] = useState(false);
-    const navigate = useNavigate();
-    const videoRefs = useRef([]);
-    const videos = [
-        "https://videos.pexels.com/video-files/3971351/3971351-uhd_2560_1440_25fps.mp4",
-        "https://videos.pexels.com/video-files/3140099/3140099-hd_1920_1080_30fps.mp4",
-        "https://videos.pexels.com/video-files/1730393/1730393-uhd_2560_1440_25fps.mp4",
-        "https://videos.pexels.com/video-files/1723017/1723017-uhd_2560_1440_25fps.mp4"
+    // Danh sách ảnh từ thư mục public/img/
+    const images = [
+        "/img/pexels-ian-panelo-3571551.jpg",
+        "/img/pexels-stijn-dijkstra-1306815-2583852.jpg",
+        "/img/pexels-samkolder-2387866.jpg",
+        "/img/pexels-oidonnyboy-3375116.jpg"
     ];
 
-    useEffect(() => {
-        const handleVideoPlayback = () => {
-            videoRefs.current.forEach((videoElement) => {
-                const handleLoadedData = () => {
-                    const playPromise = videoElement.play();
-
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            // Video is playing
-                        }).catch((error) => {
-                            // Auto-play was prevented
-                            console.error("Error attempting to play video:", error);
-                        });
-                    }
-                };
-
-                videoElement.addEventListener('loadeddata', handleLoadedData);
-                videoElement.load(); // Ensure the video is loaded
-            });
-        };
-        handleVideoPlayback();
-    }, [videos]);
-
-
-
-
-   
     return (
         <div className="relative h-[770px]">
-            <div className={`overlay ${isSearchActive ? 'active' : ''}`}></div>
+            
+
+            {/* Hiển thị hình ảnh thay vì video */}
             <div className="absolute top-0 left-0 w-full h-full grid grid-cols-2 grid-rows-2 gap-0 z-0">
-                {videos.map((video, index) => (
-                    <video
+                {images.map((img, index) => (
+                    <img
                         key={index}
-                        ref={(el) => (videoRefs.current[index] = el)}
-                        autoPlay
-                        muted
-                        loop
+                        src={img}
+                        alt={`Background ${index + 1}`}
                         className="w-full h-full object-cover"
-                    >
-                        <source
-                            src={video}
-                            type="video/mp4"
-                        />
-                        Your browser does not support the video tag.
-                    </video>
+                    />
                 ))}
             </div>
+
+            {/* Nội dung Navbar */}
             <div className="relative z-10 h-full" id="header">
                 <nav
                     className="flex justify-between p-5"
@@ -77,10 +44,9 @@ const Navbar = () => {
                 >
                     <div className="text-red-600 font-bold text-3xl hover:text-red-400 cursor-pointer my-2">airbnb</div>
 
-                    <div className="nav-links flex space-x-4 my-4">
-                        <Link to="/login" className="mx-2">
-                            <a
-                                href="#_"
+                    <div className="nav-links flex space-x-4">
+                    <   Link to="/login" className="mx-2">
+                            <div
                                 className="relative px-5 py-3 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 rounded-lg shadow-inner group"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.35)',
@@ -96,11 +62,10 @@ const Navbar = () => {
                                 <span className="absolute bottom-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-gray-600 group-hover:h-full ease"></span>
                                 <span className="absolute inset-0 w-full h-full duration-300 delay-300 bg-gray-900 opacity-0 group-hover:opacity-100"></span>
                                 <span className="relative transition-colors duration-300 delay-200 group-hover:text-white ease">Đăng Nhập</span>
-                            </a>
+                            </div>
                         </Link>
                         <Link to="/register" className="mx-2">
-                            <a
-                                href="#_"
+                            <div
                                 className="relative px-5 py-3 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 rounded-lg shadow-inner group"
                                 style={{
                                     background: 'rgba(255, 255, 255, 0.35)',
@@ -116,7 +81,7 @@ const Navbar = () => {
                                 <span className="absolute bottom-0 left-0 w-full h-0 transition-all duration-300 delay-200 bg-gray-600 group-hover:h-full ease"></span>
                                 <span className="absolute inset-0 w-full h-full duration-300 delay-300 bg-gray-900 opacity-0 group-hover:opacity-100"></span>
                                 <span className="relative transition-colors duration-300 delay-200 group-hover:text-white ease">Đăng Ký</span>
-                            </a>
+                            </div>
                         </Link>
                     </div>
                 </nav>

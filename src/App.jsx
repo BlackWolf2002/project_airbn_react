@@ -21,7 +21,7 @@ function App() {
         <AuthProvider>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Login />} />
 
@@ -51,7 +51,7 @@ function App() {
                         }
                     />
 
-                    {/* Route cho quản lý Vị Trí */}
+                    {/* Route cho quản lý Vị Trí*/}
                     <Route
                         path="/admin/locations"
                         element={
@@ -61,7 +61,7 @@ function App() {
                         }
                     />
 
-                    {/* Route cho quản lý Booking */}
+                    {/* Route cho quản lý Booking*/}
                     <Route
                         path="/admin/bookings"
                         element={

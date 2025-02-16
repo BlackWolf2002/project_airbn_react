@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext"; // Đường dẫn đúng
+import { AuthContext } from "../contexts/AuthContext";
 import { login, register } from "../api/authService";
 import { useNavigate } from "react-router-dom";
 import "../style/Login.css";
@@ -7,7 +7,6 @@ import "../style/Login.css";
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [isLogin, setIsLogin] = useState(true);
     const [message, setMessage] = useState("");
@@ -27,12 +26,12 @@ const Login = () => {
                     return;
                 }
 
-                // Lưu thông tin user & token
+                // Lưu thông tin người dùng vào localStorage
                 loginUser(data.user);
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
 
-                // Kiểm tra role
+                // Nếu user là Admin, chuyển đến trang Admin
                 if (data.user.role === "ADMIN") {
                     navigate("/admin");
                 } else {
@@ -50,42 +49,14 @@ const Login = () => {
     };
 
     return (
-        <div className="container-login">
-            <div
-                className={`form-container ${
-                    isLogin ? "sign-in-container" : "sign-up-container"
-                }`}
-            >
+        <div
+            className={`container-login ${
+                !isLogin ? "right-panel-active" : ""
+            }`}
+        >
+            <div className="form-container sign-in-container">
                 <form onSubmit={handleSubmit}>
-                    <h1>{isLogin ? "Đăng Nhập" : "Đăng Ký"}</h1>
-                    {!isLogin && (
-                        <>
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Tên"
-                                onChange={handleChange}
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="phone"
-                                placeholder="Số điện thoại"
-                                onChange={handleChange}
-                                required
-                            />
-                            <input
-                                type="date"
-                                name="birthday"
-                                onChange={handleChange}
-                                required
-                            />
-                            <select name="gender" onChange={handleChange}>
-                                <option value={true}>Nam</option>
-                                <option value={false}>Nữ</option>
-                            </select>
-                        </>
-                    )}
+                    <h1>Đăng Nhập</h1>
                     <input
                         type="email"
                         name="email"
@@ -100,9 +71,36 @@ const Login = () => {
                         onChange={handleChange}
                         required
                     />
-                    <button type="submit">
-                        {isLogin ? "Đăng Nhập" : "Đăng Ký"}
-                    </button>
+                    <button type="submit">Đăng Nhập</button>
+                    <p className="message">{message}</p>
+                </form>
+            </div>
+
+            <div className="form-container sign-up-container">
+                <form onSubmit={handleSubmit}>
+                    <h1>Đăng Ký</h1>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Tên"
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Mật khẩu"
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit">Đăng Ký</button>
                     <p className="message">{message}</p>
                 </form>
             </div>

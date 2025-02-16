@@ -1,3 +1,4 @@
+
 const RoomDetail = ({ room }) => {
     if (!room) {
         return <div className="text-center text-lg mt-10">Đang tải dữ liệu...</div>;
