@@ -16,11 +16,6 @@ const Navbar = () => {
         }
     }, [user]);
 
-    // Debug xem user hiện tại có role ADMIN hay không
-    useEffect(() => {
-        console.log("🔎 Kiểm tra user trong Navbar:", currentUser);
-    }, [currentUser]);
-
     // Danh sách ảnh từ thư mục public/img/
     const images = [
         "/img/pexels-ian-panelo-3571551.jpg",
@@ -31,7 +26,7 @@ const Navbar = () => {
 
     return (
         <div className="relative h-[770px]">
-            {/* Hiển thị hình ảnh nền */}
+            {/* Hiển thị hình ảnh thay vì video */}
             <div className="absolute top-0 left-0 w-full h-full grid grid-cols-2 grid-rows-2 gap-0 z-0">
                 {images.map((img, index) => (
                     <img
@@ -60,7 +55,7 @@ const Navbar = () => {
                         airbnb
                     </div>
 
-                    {/* Nếu đã đăng nhập -> Hiển thị Avatar + Tên + Nút Admin (nếu có) */}
+                    {/* Nếu đã đăng nhập -> Hiển thị Avatar + Tên */}
                     {currentUser ? (
                         <div className="flex items-center space-x-4">
                             <img
@@ -74,24 +69,20 @@ const Navbar = () => {
                                 {currentUser.name}
                             </span>
 
-                            {/* Nếu là ADMIN -> Hiển thị nút "Trang Quản trị" */}
+                            {/* Nếu user có role ADMIN thì hiển thị nút "Trang Quản Trị" */}
                             {currentUser.role === "ADMIN" && (
                                 <button
-                                    onClick={() => {
-                                        console.log("✅ Chuyển hướng Admin");
-                                        navigate("/admin/users"); // Điều hướng đến trang quản trị
-                                    }}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                                    onClick={() => navigate("/admin/users")}
+                                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
                                 >
-                                    Trang Quản trị
+                                    Trang Quản Trị
                                 </button>
                             )}
 
                             <button
                                 onClick={() => {
-                                    logoutUser(); // Xóa user khỏi context & localStorage
+                                    logoutUser();
                                     setCurrentUser(null);
-                                    navigate("/"); // Chuyển về Home
                                 }}
                                 className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
                             >

@@ -191,17 +191,14 @@ export const getRoomByID = async (id) => {
     }
 };
 
-const getHeaders = () => ({
-    tokenCybersoft: TOKEN_CYBERSOFT,
-    "Content-Type": "application/json",
-});
-
 export const getRoomDetails = async (roomId) => {
     try {
         const response = await axios.get(
             `${API_BASE_URL}api/phong-thue/${roomId}`,
-            {
-                headers: getHeaders(),
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                tokenCybersoft: TOKEN_CYBERSOFT,
+                "Content-Type": "application/json",
             }
         );
         return response.data.content;

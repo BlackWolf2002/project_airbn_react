@@ -15,7 +15,6 @@ import ViTri from "./pages/ViTri";
 import BookingManagement from "./pages/BookingManagement";
 import RoomsByLocation from "./pages/RoomsByLocation.jsx";
 import RoomDetailPage from "./pages/RoomDetailPage"; // Import trang chi tiết phòng
-import Profile from "./pages/Profile.jsx";
 
 function App() {
     return (
@@ -25,8 +24,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Login />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile />}
 
+                    {/* Nếu vào /admin, tự động chuyển hướng đến /admin/users */}
                     <Route
                         path="/admin"
                         element={<Navigate to="/admin/users" />}

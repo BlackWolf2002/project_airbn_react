@@ -17,7 +17,11 @@ const Login = () => {
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         if (storedUser) {
-            navigate("/"); // 🔥 Dù là admin hay user đều về Home
+            if (storedUser.role === "ADMIN") {
+                navigate("/admin");
+            } else {
+                navigate("/profile");
+            }
         }
     }, [navigate]);
 
@@ -38,10 +42,18 @@ const Login = () => {
                 loginUser(data.user);
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
-                localStorage.setItem("userId", data.user.id);
+                localStorage.setItem("userId", data.user.id); // 🔥 Lưu ID của người dùng vào localStorage
 
-                console.log("📢 Đăng nhập thành công! Điều hướng về Home");
-                navigate("/"); // 🔥 Sau khi đăng nhập, luôn về trang Home
+                console.log(
+                    "📢 userId sau login (phải khớp với maNguoiDung):",
+                    data.user.id
+                );
+
+                if (data.user.role === "ADMIN") {
+                    navigate("/admin");
+                } else {
+                    navigate("/profile");
+                }
             } else {
                 await register(formData);
                 setMessage("Đăng ký thành công! Hãy đăng nhập.");

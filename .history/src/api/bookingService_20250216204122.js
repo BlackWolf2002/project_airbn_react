@@ -86,43 +86,18 @@ export const deleteBooking = async (id) => {
     }
 };
 
-export const getUserBookings = async () => {
+// 🛠 Lấy danh sách đặt phòng của người dùng theo ID từ Swagger
+export const getUserBookings = async (maNguoiDung) => {
     try {
-        const userId = localStorage.getItem("userId"); // Lấy userId từ localStorage
-        console.log("📢 Đang gọi API với MaNguoiDung:", userId);
-
-        if (!userId) {
-            throw new Error(
-                "❌ Không tìm thấy userId, vui lòng đăng nhập lại."
-            );
-        }
-
         const response = await axios.get(
-            `${API_BASE_URL}api/dat-phong/lay-theo-nguoi-dung/${userId}`,
+            `${API_BASE_URL}api/dat-phong/lay-theo-nguoi-dung/${maNguoiDung}`,
             {
-                headers: {
-                    tokenCybersoft: TOKEN_CYBERSOFT,
-                    "Content-Type": "application/json",
-                },
+                headers: getHeaders(),
             }
         );
-
-        console.log("✅ API Response:", response.data);
-
-        // Kiểm tra xem `maNguoiDung` có khớp với `userId` hay không
-        const bookings = response.data.content || [];
-        bookings.forEach((booking) => {
-            console.log(
-                `🔎 Kiểm tra maNguoiDung: ${booking.maNguoiDung} (phải trùng với userId: ${userId})`
-            );
-        });
-
-        return bookings;
+        return response.data.content;
     } catch (error) {
-        console.error(
-            "❌ Lỗi khi lấy danh sách đặt phòng:",
-            error.response?.data || error
-        );
-        throw error.response?.data || error;
+        console.error("❌ Lỗi khi lấy danh sách đặt phòng:", error);
+        throw error;
     }
 };

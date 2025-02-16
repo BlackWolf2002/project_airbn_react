@@ -25,8 +25,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Login />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/profile" element={<Profile />}
 
+                    {/* Nếu vào /admin, tự động chuyển hướng đến /admin/users */}
                     <Route
                         path="/admin"
                         element={<Navigate to="/admin/users" />}

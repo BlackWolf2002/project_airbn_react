@@ -89,8 +89,6 @@ export const deleteBooking = async (id) => {
 export const getUserBookings = async () => {
     try {
         const userId = localStorage.getItem("userId"); // Lấy userId từ localStorage
-        console.log("📢 Đang gọi API với MaNguoiDung:", userId);
-
         if (!userId) {
             throw new Error(
                 "❌ Không tìm thấy userId, vui lòng đăng nhập lại."
@@ -98,7 +96,7 @@ export const getUserBookings = async () => {
         }
 
         const response = await axios.get(
-            `${API_BASE_URL}api/dat-phong/lay-theo-nguoi-dung/${userId}`,
+            `${API_BASE_URL}api/dat-phong/lay-theo-nguoi-dung/${maNguoiDung}`,
             {
                 headers: {
                     tokenCybersoft: TOKEN_CYBERSOFT,
@@ -107,17 +105,8 @@ export const getUserBookings = async () => {
             }
         );
 
-        console.log("✅ API Response:", response.data);
-
-        // Kiểm tra xem `maNguoiDung` có khớp với `userId` hay không
-        const bookings = response.data.content || [];
-        bookings.forEach((booking) => {
-            console.log(
-                `🔎 Kiểm tra maNguoiDung: ${booking.maNguoiDung} (phải trùng với userId: ${userId})`
-            );
-        });
-
-        return bookings;
+        console.log("✅ Danh sách đặt phòng:", response.data);
+        return response.data.content || [];
     } catch (error) {
         console.error(
             "❌ Lỗi khi lấy danh sách đặt phòng:",

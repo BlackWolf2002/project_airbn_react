@@ -20,7 +20,7 @@ const AdminNavbar = () => {
                     <Link to="/admin/bookings">Quản lý Booking</Link>
                 </li>
                 <li>
-                    <Link to="/">Về Lại Trang Chủ</Link>
+                    <Link to="/admin/bookings">Quản lý Booking</Link>
                 </li>
             </ul>
         </div>

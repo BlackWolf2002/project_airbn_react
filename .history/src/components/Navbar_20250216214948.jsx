@@ -16,11 +16,6 @@ const Navbar = () => {
         }
     }, [user]);
 
-    // Debug xem user hiện tại có role ADMIN hay không
-    useEffect(() => {
-        console.log("🔎 Kiểm tra user trong Navbar:", currentUser);
-    }, [currentUser]);
-
     // Danh sách ảnh từ thư mục public/img/
     const images = [
         "/img/pexels-ian-panelo-3571551.jpg",
@@ -77,10 +72,7 @@ const Navbar = () => {
                             {/* Nếu là ADMIN -> Hiển thị nút "Trang Quản trị" */}
                             {currentUser.role === "ADMIN" && (
                                 <button
-                                    onClick={() => {
-                                        console.log("✅ Chuyển hướng Admin");
-                                        navigate("/admin/users"); // Điều hướng đến trang quản trị
-                                    }}
+                                    onClick={() => navigate("/admin/users")}
                                     className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                                 >
                                     Trang Quản trị

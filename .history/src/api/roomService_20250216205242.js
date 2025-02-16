@@ -191,11 +191,6 @@ export const getRoomByID = async (id) => {
     }
 };
 
-const getHeaders = () => ({
-    tokenCybersoft: TOKEN_CYBERSOFT,
-    "Content-Type": "application/json",
-});
-
 export const getRoomDetails = async (roomId) => {
     try {
         const response = await axios.get(
