@@ -56,7 +56,7 @@ const RoomDetail = ({ room }) => {
             const formattedCheckInDate = format(checkInDate, "dd/MM/yyyy");
             const formattedCheckOutDate = format(checkOutDate, "dd/MM/yyyy");
 
-            const bookings = await fetchUserBookings(); // Gọi API lấy danh sách đặt phòng của người dùng
+            const bookings = await fetchBookings(); // Gọi API lấy danh sách đặt phòng của người dùng
             console.log("📌 Danh sách Booking:", bookings);
 
             // Kiểm tra xem phòng có bị đặt vào khoảng thời gian đã chọn không
