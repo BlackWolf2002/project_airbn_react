@@ -11,7 +11,7 @@ const RoomDetail = ({ room }) => {
     const [checkInDate, setCheckInDate] = useState(null); 
     const [checkOutDate, setCheckOutDate] = useState(null); 
     const [guestCount, setGuestCount] = useState(1); // New state for guest count
-    const [roomId, setRoomId] = useState(null); // New state for room ID
+    const [bookingId, setBookingId] = useState(null); // New state for booking ID
 
     const handleBooking = async () => {
         try {
@@ -23,25 +23,25 @@ const RoomDetail = ({ room }) => {
 
             const userData = await getUserById(userId);
             setUser(userData); 
-            const newRoomId = await generateUniqueRoomId();
-            setRoomId(newRoomId); // Set the generated room ID
+            const newBookingId = await generateUniqueBookingId();
+            setBookingId(newBookingId); // Set the generated booking ID
             setShowPopup(true); 
         } catch (error) {
             console.error("❌ Lỗi khi lấy thông tin người dùng:", error);
         }
     };
 
-    const generateUniqueRoomId = async () => {
+    const generateUniqueBookingId = async () => {
         try {
             const bookings = await fetchBookings();
-            const existingRoomIds = bookings.map(booking => booking.maPhong);
-            let newRoomId;
+            const existingBookingIds = bookings.map(booking => booking.id);
+            let newBookingId;
             do {
-                newRoomId = Math.floor(Math.random() * 1000000); // Generate a random room ID
-            } while (existingRoomIds.includes(newRoomId));
-            return newRoomId;
+                newBookingId = Math.floor(Math.random() * 1000000); // Generate a random booking ID
+            } while (existingBookingIds.includes(newBookingId));
+            return newBookingId;
         } catch (error) {
-            console.error("❌ Lỗi khi lấy danh sách phòng:", error);
+            console.error("❌ Lỗi khi lấy danh sách đặt phòng:", error);
             throw error;
         }
     };
@@ -76,7 +76,8 @@ const RoomDetail = ({ room }) => {
 
             // Thêm đặt phòng mới
             const bookingData = {
-                maPhong: roomId,
+                id: bookingId,
+                maPhong: room.id,
                 ngayDen: checkInDate,
                 ngayDi: checkOutDate,
                 soLuongKhach: guestCount,
@@ -97,7 +98,7 @@ const RoomDetail = ({ room }) => {
         setCheckInDate(null); 
         setCheckOutDate(null); 
         setGuestCount(1); // Reset guest count
-        setRoomId(null); // Reset room ID
+        setBookingId(null); // Reset booking ID
     };
 
     if (!room) {
@@ -137,7 +138,7 @@ const RoomDetail = ({ room }) => {
                         <h2 className="text-xl font-bold mb-4">Xác nhận đặt phòng</h2>
                         <p><strong>Họ và tên:</strong> {user.name}</p>
                         <p><strong>Phòng:</strong> {room.tenPhong}</p>
-                        <p><strong>Mã phòng:</strong> {roomId}</p> {/* Show room ID */}
+                        <p><strong>Mã đặt phòng:</strong> {bookingId}</p> {/* Show booking ID */}
                         <p><strong>Thành tiền:</strong> <span className="text-red-500 font-bold">{room.giaTien} VND</span></p>
                         <p><strong>Số điện thoại:</strong> {user.phone}</p>
 
