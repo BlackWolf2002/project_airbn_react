@@ -199,29 +199,15 @@ const getHeaders = () => ({
 
 export const getRoomDetails = async (roomId) => {
     try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            throw new Error("❌ Token không tồn tại. Vui lòng đăng nhập lại.");
-        }
-
         const response = await axios.get(
             `${API_BASE_URL}api/phong-thue/${roomId}`,
             {
-                headers: {
-                    token: token,
-                    tokenCybersoft: TOKEN_CYBERSOFT,
-                    "Content-Type": "application/json",
-                },
+                headers: getHeaders(),
             }
         );
-
-        if (response.status === 404) {
-            throw new Error(`❌ Không tìm thấy phòng với ID: ${roomId}`);
-        }
-
         return response.data.content;
     } catch (error) {
-        console.error("❌ Lỗi khi lấy chi tiết phòng:", error.message);
+        console.error("❌ Lỗi khi lấy thông tin chi tiết phòng:", error);
         throw error;
     }
 };

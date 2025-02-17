@@ -5,10 +5,11 @@ import { getUserById, updateUser } from "../api/userService";
 import { getUserBookings } from "../api/bookingService";
 import { getRoomDetails } from "../api/roomService";
 import moment from "moment";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
     const { user, logoutUser } = useContext(AuthContext);
-    const navigate = useNavigate(); // Điều hướng về trang khác
+    const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [bookings, setBookings] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -96,12 +97,9 @@ const Profile = () => {
         }
     };
 
-    const handleGoHome = () => {
-        navigate("/"); // Điều hướng về trang Home
-    };
-
     return (
         <div className="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+            <Navbar />
             <div className="flex flex-col md:flex-row items-center md:items-start">
                 <div className="md:w-1/3 p-4 border-r">
                     <h2 className="text-2xl font-bold">
@@ -177,12 +175,6 @@ const Profile = () => {
                         className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
                     >
                         Đăng xuất
-                    </button>
-                    <button
-                        onClick={handleGoHome} // Button điều hướng về trang Home
-                        className="mt-4 w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600"
-                    >
-                        Về Trang Chủ
                     </button>
                 </div>
                 <div className="md:w-2/3 md:pl-10">
