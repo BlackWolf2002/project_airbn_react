@@ -18,3 +18,33 @@ export const getBinhLuanTheoPhong = async (maPhong) => {
         return null; // Trả về null nếu có lỗi
     }
 };
+
+
+
+
+export const dangBinhLuan = async (id, noiDung, saoBinhLuan) => {
+    try {
+        const response = await axios.put(
+            `${BASE_URL}/binh-luan/${id}`, 
+            {
+                id: id, // Nếu API yêu cầu
+                maPhong: id, // Nếu API yêu cầu
+                noiDung: noiDung,
+                saoBinhLuan: saoBinhLuan,
+                ngayBinhLuan: new Date().toISOString(), // Nếu API yêu cầu
+            },
+            {
+                headers: {
+                    tokenCybersoft: TOKEN,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.log("✅ Bình luận đã gửi thành công:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("❌ Lỗi khi gửi bình luận:", error.response?.data || error.message);
+        return null;
+    }
+};
